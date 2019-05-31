@@ -34,7 +34,7 @@ function love.update(dt)
     end
 
     -- Shoots the bullets if space is held down/pressed
-    if love.keyboard.keypressed("space") then
+    if love.keyboard.isDown("space") then
         -- This function here will fire a dot
         player.launch()
     end
