@@ -57,6 +57,7 @@ function love.load()
 end
 
 function love.update(dt)
+    -- All of this code relates to the player
     -- Here it will reduce the cooldown to 0
     player.cooldown = player.cooldown - 1
     -- Here it will move to the right if the right arrow is pressed/held
@@ -77,6 +78,12 @@ function love.update(dt)
     -- Without this, the loop below will only create a dot but it will not move
     for _, d in pairs(player.dots) do
         d.y = d.y - 10
+    end
+
+    
+    -- This code here relates to the enemy
+    for _, e in pairs(enemies_ai.enemies) do
+        e.coords.y = e.coords.y + 0.8
     end
 end
 
