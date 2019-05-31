@@ -42,9 +42,6 @@ function love.update(dt)
     -- All this loop here does is that anytime the launch function is called it will make it so that the bullet moves
     -- Without this, the loop below will only create a dot but it will not move
     for _, d in pairs(player.dots) do
-        if d.y < 10 then
-            table.remove(player.dots)
-        end
         d.y = d.y - 10
     end
 end
