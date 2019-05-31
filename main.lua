@@ -1,4 +1,10 @@
+-- Here is the object containing enemy information (speed, coordinates, etc)
+enemy = {}
+enemy.coords = {}
+enemies_ai = {}
+enemies_ai.enemies = {}
 function love.load()
+    -- All the code about the player itself is up here
     -- Array/Object of the player containing info about it (speed, coordinates, etc)
     player = {}
     -- This is the coordinate of a player
@@ -20,6 +26,30 @@ function love.load()
             dot.x = player.coords.x + 35
             dot.y = player.coords.y - 4
             table.insert(player.dots, dot)
+        end
+    end
+
+    -- This is where all the code for the enemy firing and other stuff will be
+    -- The code can be similar to the players' but without input from a keyboard (multiplayer could be made uwu)
+
+    -- Here is a function that whenever it is called it will spawn an enemy on screen
+    function enemies_ai:spawn()
+        enemy.coords.x = 0
+        enemy.coords.y = 0
+        enemy.speed = 5
+        enemy.cooldown = 22
+        enemy.dots = {}
+        table.insert(self.enemies, enemy)
+    end
+
+    function enemy:launch()
+        -- If the cooldown does ever reach 0 then it will set it back to the default
+        if self.cooldown <= 0 then 
+            self.cooldown = 22
+            dot = {}
+            dot.x = self.coords.x + 35
+            dot.y = self.coords.y - 4
+            table.insert(self.dots, dot)
         end
     end
 end
