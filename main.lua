@@ -13,6 +13,7 @@ function love.load()
     player.dots = {}
     -- And here we will launch (fire/shoot) them
     player.launch = function()
+        -- If the cooldown does ever reach 0 then it will set it back to the default
         if player.cooldown <= 0 then 
             player.cooldown = 22
             dot = {}
@@ -24,6 +25,7 @@ function love.load()
 end
 
 function love.update(dt)
+    -- Here it will reduce the cooldown to 0
     player.cooldown = player.cooldown - 1
     -- Here it will move to the right if the right arrow is pressed/held
     if love.keyboard.isDown("right") then
