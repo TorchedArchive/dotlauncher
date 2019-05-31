@@ -92,6 +92,6 @@ function love.draw()
     -- Code here relates to the enemies
     -- Renders an enemy anytime the spawn function is called
     for _, e in pairs(enemies_ai.enemies) do
-        love.graphics.rectangle("fill", e.x, e.y, 80, 15)
+        love.graphics.rectangle("fill", e.coords.x, e.coords.y, 80, 15)
     end
 end
