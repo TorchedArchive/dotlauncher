@@ -18,7 +18,7 @@ function love.load()
             player.cooldown = 22
             dot = {}
             dot.x = player.coords.x + 35
-            dot.y = player.coords.y
+            dot.y = player.coords.y - 4
             table.insert(player.dots, dot)
         end
     end
