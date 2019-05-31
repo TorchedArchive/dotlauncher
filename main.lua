@@ -52,6 +52,8 @@ function love.load()
             table.insert(self.dots, dot)
         end
     end
+
+    enemies_ai:spawn()
 end
 
 function love.update(dt)
@@ -79,9 +81,17 @@ function love.update(dt)
 end
 
 function love.draw()
+    -- Code here relates to the player
+    -- Renders a character
     love.graphics.rectangle("fill", player.coords.x, player.coords.y, 80, 15)
     -- The loop down here checks if the launch function is called and makes a drawing of a bullet
     for _, d in pairs(player.dots) do
         love.graphics.rectangle("fill", d.x, d.y, 10, 10)
+    end
+
+    -- Code here relates to the enemies
+    -- Renders an enemy anytime the spawn function is called
+    for _, e in pairs(enemies_ai.enemies) do
+        love.graphics.rectangle("fill", e.x, e.y, 80, 15)
     end
 end
