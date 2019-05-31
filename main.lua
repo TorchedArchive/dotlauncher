@@ -11,7 +11,7 @@ function love.load()
     -- And here we will launch (fire/shoot) them
     player.launch = function()
         dot = {}
-        dot.x = player.coords.x
+        dot.x = player.coords.x + 35
         dot.y = 584
         table.insert(player.dots, dot)
     end
@@ -32,6 +32,8 @@ function love.update(dt)
         player.launch()
     end
 
+    -- All this loop here does is that anytime the launch function is called it will make it so that the bullet moves
+    -- Without this, the loop below will only create a dot but it will not move
     for _, d in pairs(player.dots) do
         d.y = d.y - 10
     end
@@ -39,6 +41,7 @@ end
 
 function love.draw()
     love.graphics.rectangle("fill", player.coords.x, 584, 80, 15)
+    -- The loop down here checks if the launch function is called and makes a drawing of a bullet
     for _, d in pairs(player.dots) do
         love.graphics.rectangle("fill", d.x, d.y, 10, 10)
     end
