@@ -4,20 +4,27 @@ function love.load()
     -- This is the coordinate of a player
     player.coords = {}
     player.coords.x = 0
+    player.coords.y = 582
     -- This is how fast they will go along the x axis (speed)
     player.speed = 5
+    -- In order to stop the player from shooting a beam but instead an actual dot, we will add a cooldown to shoot
+    player.cooldown = 22
     -- These are the bullets (Lets call them Dot) that the player will shoot out of their "Dot Launcher"
     player.dots = {}
     -- And here we will launch (fire/shoot) them
     player.launch = function()
-        dot = {}
-        dot.x = player.coords.x + 35
-        dot.y = 584
-        table.insert(player.dots, dot)
+        if player.cooldown <= 0 then 
+            player.cooldown = 22
+            dot = {}
+            dot.x = player.coords.x + 35
+            dot.y = player.coords.y
+            table.insert(player.dots, dot)
+        end
     end
 end
 
 function love.update(dt)
+    player.cooldown = player.cooldown - 1
     -- Here it will move to the right if the right arrow is pressed/held
     if love.keyboard.isDown("right") then
         player.coords.x = player.coords.x + player.speed
@@ -35,12 +42,15 @@ function love.update(dt)
     -- All this loop here does is that anytime the launch function is called it will make it so that the bullet moves
     -- Without this, the loop below will only create a dot but it will not move
     for _, d in pairs(player.dots) do
+        if d.y < 10 then
+            table.remove(player.dots)
+        end
         d.y = d.y - 10
     end
 end
 
 function love.draw()
-    love.graphics.rectangle("fill", player.coords.x, 584, 80, 15)
+    love.graphics.rectangle("fill", player.coords.x, player.coords.y, 80, 15)
     -- The loop down here checks if the launch function is called and makes a drawing of a bullet
     for _, d in pairs(player.dots) do
         love.graphics.rectangle("fill", d.x, d.y, 10, 10)
