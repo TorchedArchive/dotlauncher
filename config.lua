@@ -28,4 +28,4 @@
     ii. Distribute a modified version of this application claiming it is entirely your work.
 --]]
 
-version = "0.0.40"
+version = "0.0.42"

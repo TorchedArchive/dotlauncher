@@ -134,7 +134,6 @@ end
 function love.draw()
     -- Makes the background color similar to Pong
     love.graphics.clear(0.156, 0.176, 0.203, 1)
-
     -- Code here relates to the player
     -- Gives the player a blue color
     love.graphics.setColor(0.2, 0.576, 1)
@@ -142,11 +141,14 @@ function love.draw()
     love.graphics.rectangle("fill", player.coords.x, player.coords.y, player.height, player.width)
     -- The loop down here checks if the launch function is called and makes a drawing of a bullet
     -- Makes the bullets white
+    love.graphics.setColor(1, 1, 1)
     for _, d in pairs(player.dots) do
         love.graphics.rectangle("fill", d.x, d.y, 10, 10)
     end
 
     -- Code here relates to the enemies
+    -- Makes the enemy a red color
+    love.graphics.setColor(1, 0.176, 0.156)
     -- Renders an enemy anytime the spawn function is called
     for _, e in pairs(enemies_ai.enemies) do
         love.graphics.rectangle("fill", e.coords.x, e.coords.y, e.height, e.width)
