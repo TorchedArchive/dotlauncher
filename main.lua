@@ -3,6 +3,7 @@ enemy = {}
 enemy.coords = {}
 enemies_ai = {}
 enemies_ai.enemies = {}
+
 function love.load()
     -- All the code about the player itself is up here
     -- Array/Object of the player containing info about it (speed, coordinates, etc)
@@ -11,6 +12,9 @@ function love.load()
     player.coords = {}
     player.coords.x = 0
     player.coords.y = 582
+    -- How high and wide the rendered player will be
+    player.height = 80
+    player.width = 15
     -- This is how fast they will go along the x axis (speed)
     player.speed = 5
     -- In order to stop the player from shooting a beam but instead an actual dot, we will add a cooldown to shoot
@@ -36,6 +40,8 @@ function love.load()
     function enemies_ai:spawn(xc, yc)
         enemy = {}
         enemy.coords = {}
+        enemy.height = 80
+        enemy.width = 15
         enemy.coords.x = xc
         enemy.coords.y = yc
         enemy.speed = 5
@@ -43,11 +49,22 @@ function love.load()
         table.insert(self.enemies, enemy)
     end
 
+    -- This snippet of code right here spawns multiple enemies at once (in this case 5)
     for i = 0, 5 do
         enemies_ai:spawn(i * 100, 0)
     end
 
     print(enemy)
+end
+
+function collisionDetection(enemies, dots)
+    for a, e in pairs(enemies) do
+        for _, d in pairs(dots) do
+            if d.y + d.height <= e.coords.y then
+                table.delete(enemies, a)
+            end
+        end
+    end
 end
 
 function love.update(dt)
@@ -69,7 +86,7 @@ function love.update(dt)
     end
 
     -- All this loop here does is that anytime the launch function is called it will make it so that the bullet moves
-    -- Without this, the loop below will only create a dot but it will not move
+    -- Without this, the first loop below in our draw function will only create a dot but it will not move
     for _, d in pairs(player.dots) do
         d.y = d.y - 10
     end
@@ -84,7 +101,7 @@ end
 function love.draw()
     -- Code here relates to the player
     -- Renders a character
-    love.graphics.rectangle("fill", player.coords.x, player.coords.y, 80, 15)
+    love.graphics.rectangle("fill", player.coords.x, player.coords.y, player.height, player.width)
     -- The loop down here checks if the launch function is called and makes a drawing of a bullet
     for _, d in pairs(player.dots) do
         love.graphics.rectangle("fill", d.x, d.y, 10, 10)
@@ -94,6 +111,6 @@ function love.draw()
     -- Renders an enemy anytime the spawn function is called
     love.graphics.setColor(255, 0, 0)
     for _, e in pairs(enemies_ai.enemies) do
-        love.graphics.rectangle("fill", e.coords.x, e.coords.y, 80, 15)
+        love.graphics.rectangle("fill", e.coords.x, e.coords.y, e.height, e.width)
     end
 end
