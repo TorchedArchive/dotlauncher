@@ -58,10 +58,10 @@ function love.load()
 end
 
 function collisionDetection(enemies, dots)
-    for a, e in pairs(enemies) do
+    for i, e in ipairs(enemies) do
         for _, d in pairs(dots) do
             if d.y + d.height <= e.coords.y then
-                table.delete(enemies, a)
+                table.remove(enemies, i)
             end
         end
     end
