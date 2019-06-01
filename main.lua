@@ -35,6 +35,16 @@ enemies_ai = {}
 enemies_ai.enemies = {}
 
 function love.load()
+    --[[
+        So, to make a main menu we will have to have a different "state" for the game.
+        My plan is to make it so there are 3 types of states:
+        i. Game state
+        ii. Main menu state
+        iii. Pause menu state
+
+        All this variable does is make it so we can know what state the game is currently in.
+    ]]--
+    state = "menu"
     -- All the code about the player itself is up here
     -- Array/Object of the player containing info about it (speed, coordinates, etc)
     player = {}
@@ -91,66 +101,76 @@ function collisionDetection(enemies, dots)
     for i, e in ipairs(enemies) do
         for _, d in pairs(dots) do
             if d.y + d.height <= e.coords.y and d.x > e.coords.x and e.coords.x < d.x + d.width then
-                table.remove(enemies, i)
+                return false
+            else
+                return table.remove(enemies, i)
             end
         end
     end
 end
 
 function love.update(dt)
-    -- All of this code relates to the player
-    -- Here it will reduce the cooldown to 0
-    player.cooldown = player.cooldown - 1
-    -- Here it will move to the right if the right arrow is pressed/held
-    if love.keyboard.isDown("right") then
-        player.coords.x = player.coords.x + player.speed
-    -- And will do the same thing above except to the left
-    elseif love.keyboard.isDown("left") then
-        player.coords.x = player.coords.x - player.speed
-    end
+    if state == "menu" then
+        return
+    else
+        -- All of this code relates to the player
+        -- Here it will reduce the cooldown to 0
+        player.cooldown = player.cooldown - 1
+        -- Here it will move to the right if the right arrow is pressed/held
+        if love.keyboard.isDown("right") then
+            player.coords.x = player.coords.x + player.speed
+        -- And will do the same thing above except to the left
+        elseif love.keyboard.isDown("left") then
+            player.coords.x = player.coords.x - player.speed
+        end
 
-    -- Shoots the bullets if space is held down/pressed
-    if love.keyboard.isDown("space") then
-        -- This function here will fire a dot
-        player.launch()
-    end
+        -- Shoots the bullets if space is held down/pressed
+        if love.keyboard.isDown("space") then
+            -- This function here will fire a dot
+            player.launch()
+        end
 
-    -- All this loop here does is that anytime the launch function is called it will make it so that the bullet moves
-    -- Without this, the first loop below in our draw function will only create a dot but it will not move
-    for _, d in pairs(player.dots) do
-        d.y = d.y - 10
-    end
+        -- All this loop here does is that anytime the launch function is called it will make it so that the bullet moves
+        -- Without this, the first loop below in our draw function will only create a dot but it will not move
+        for _, d in pairs(player.dots) do
+            d.y = d.y - 10
+        end
 
-    
-    -- This code here relates to the enemy
-    for _, e in pairs(enemies_ai.enemies) do
-        e.coords.y = e.coords.y + 0.8
-    end
+        
+        -- This code here relates to the enemy
+        for _, e in pairs(enemies_ai.enemies) do
+            e.coords.y = e.coords.y + 0.8
+        end
 
-    -- Checks if the dots have hit the enemy
-    collisionDetection(enemies_ai.enemies, player.dots)
+        -- Checks if the dots have hit the enemy
+        collisionDetection(enemies_ai.enemies, player.dots)
+    end
 end
 
 function love.draw()
-    -- Makes the background color similar to Pong
-    love.graphics.clear(0.156, 0.176, 0.203, 1)
-    -- Code here relates to the player
-    -- Gives the player a blue color
-    love.graphics.setColor(0.2, 0.576, 1)
-    -- Renders a character
-    love.graphics.rectangle("fill", player.coords.x, player.coords.y, player.height, player.width)
-    -- The loop down here checks if the launch function is called and makes a drawing of a bullet
-    -- Makes the bullets white
-    love.graphics.setColor(1, 1, 1)
-    for _, d in pairs(player.dots) do
-        love.graphics.rectangle("fill", d.x, d.y, 10, 10)
-    end
+    if state == "menu" then
+        love.graphics.print("dotlauncher", 250, 50)
+    else
+        -- Makes the background color similar to Pong
+        love.graphics.clear(0.156, 0.176, 0.203, 1)
+        -- Code here relates to the player
+        -- Gives the player a blue color
+        love.graphics.setColor(0.2, 0.576, 1)
+        -- Renders a character
+        love.graphics.rectangle("fill", player.coords.x, player.coords.y, player.height, player.width)
+        -- The loop down here checks if the launch function is called and makes a drawing of a bullet
+        -- Makes the bullets white
+        love.graphics.setColor(1, 1, 1)
+        for _, d in pairs(player.dots) do
+            love.graphics.rectangle("fill", d.x, d.y, 10, 10)
+        end
 
-    -- Code here relates to the enemies
-    -- Makes the enemy a red color
-    love.graphics.setColor(1, 0.176, 0.156)
-    -- Renders an enemy anytime the spawn function is called
-    for _, e in pairs(enemies_ai.enemies) do
-        love.graphics.rectangle("fill", e.coords.x, e.coords.y, e.height, e.width)
+        -- Code here relates to the enemies
+        -- Makes the enemy a red color
+        love.graphics.setColor(1, 0.176, 0.156)
+        -- Renders an enemy anytime the spawn function is called
+        for _, e in pairs(enemies_ai.enemies) do
+            love.graphics.rectangle("fill", e.coords.x, e.coords.y, e.height, e.width)
+        end
     end
 end
