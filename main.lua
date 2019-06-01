@@ -43,7 +43,7 @@ function love.load()
         table.insert(self.enemies, enemy)
     end
 
-    for i = 0, 10 do
+    for i = 0, 5 do
         enemies_ai:spawn(i * 100, 0)
     end
 
