@@ -60,7 +60,7 @@ end
 function collisionDetection(enemies, dots)
     for i, e in ipairs(enemies) do
         for _, d in pairs(dots) do
-            if d.y + d.height <= e.coords.y then
+            if d.y + d.height <= e.coords.y and d.x > e.coords.x and e.coords.x < d.x + d.width then
                 table.remove(enemies, i)
             end
         end
@@ -103,16 +103,18 @@ end
 
 function love.draw()
     -- Code here relates to the player
+    -- Gives the player a blue color
+    love.graphics.setColor(0.2, 0.576, 1)
     -- Renders a character
     love.graphics.rectangle("fill", player.coords.x, player.coords.y, player.height, player.width)
     -- The loop down here checks if the launch function is called and makes a drawing of a bullet
+    -- Makes the bullets white
     for _, d in pairs(player.dots) do
         love.graphics.rectangle("fill", d.x, d.y, 10, 10)
     end
 
     -- Code here relates to the enemies
     -- Renders an enemy anytime the spawn function is called
-    love.graphics.setColor(255, 0, 0)
     for _, e in pairs(enemies_ai.enemies) do
         love.graphics.rectangle("fill", e.coords.x, e.coords.y, e.height, e.width)
     end
