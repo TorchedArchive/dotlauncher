@@ -132,6 +132,9 @@ function love.update(dt)
 end
 
 function love.draw()
+    -- Makes the background color similar to Pong
+    love.graphics.clear(0.156, 0.176, 0.203, 1)
+
     -- Code here relates to the player
     -- Gives the player a blue color
     love.graphics.setColor(0.2, 0.576, 1)
