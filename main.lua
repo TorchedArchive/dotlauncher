@@ -152,8 +152,18 @@ function love.update(dt)
 end
 
 function love.draw()
+    --[[ 
+        If the game has just been launched, it will immediately be in the menu state.
+        Here we will just create a simple menu where if the user presses Enter, it will start the game.
+    --]]
     if state == "menu" then
-        love.graphics.print("dotlauncher", 250, 50)
+        love.graphics.print("dotlauncher", 225, 50)
+
+        function love.keypressed(key)
+            if key == "return" then
+                state = "game"
+            end
+        end
     else
         -- Makes the background color similar to Pong
         love.graphics.clear(0.156, 0.176, 0.203, 1)
