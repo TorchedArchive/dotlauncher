@@ -105,8 +105,6 @@ function collisionDetection(enemies, dots)
     for i, e in ipairs(enemies) do
         for _, d in pairs(dots) do
             if d.y + d.height <= e.coords.y and d.x > e.coords.x and e.coords.x < d.x + d.width then
-                return false
-            else
                 return table.remove(enemies, i)
             end
         end
