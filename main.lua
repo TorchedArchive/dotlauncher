@@ -35,6 +35,10 @@ enemies_ai = {}
 enemies_ai.enemies = {}
 
 function love.load()
+    -- Since we need a new font, we got one on itch.io lol
+    font = love.graphics.newFont("m5x7.ttf", 100)
+    love.graphics.setFont(font)
+
     --[[
         So, to make a main menu we will have to have a different "state" for the game.
         My plan is to make it so there are 3 types of states:
@@ -153,14 +157,15 @@ function love.draw()
     else
         -- Makes the background color similar to Pong
         love.graphics.clear(0.156, 0.176, 0.203, 1)
+
         -- Code here relates to the player
         -- Gives the player a blue color
         love.graphics.setColor(0.2, 0.576, 1)
         -- Renders a character
         love.graphics.rectangle("fill", player.coords.x, player.coords.y, player.height, player.width)
-        -- The loop down here checks if the launch function is called and makes a drawing of a bullet
         -- Makes the bullets white
         love.graphics.setColor(1, 1, 1)
+        -- The loop down here checks if the launch function is called and makes a drawing of a bullet
         for _, d in pairs(player.dots) do
             love.graphics.rectangle("fill", d.x, d.y, 10, 10)
         end
