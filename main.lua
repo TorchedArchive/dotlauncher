@@ -53,8 +53,6 @@ function love.load()
     for i = 0, 5 do
         enemies_ai:spawn(i * 100, 0)
     end
-
-    print(enemy)
 end
 
 function collisionDetection(enemies, dots)
@@ -96,6 +94,9 @@ function love.update(dt)
     for _, e in pairs(enemies_ai.enemies) do
         e.coords.y = e.coords.y + 0.8
     end
+
+    -- Checks if the dots have hit the enemy
+    collisionDetection(enemies_ai.enemies, player.dots)
 end
 
 function love.draw()
