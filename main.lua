@@ -33,27 +33,21 @@ function love.load()
     -- The code can be similar to the players' but without input from a keyboard (multiplayer could be made uwu)
 
     -- Here is a function that whenever it is called it will spawn an enemy on screen
-    function enemies_ai:spawn()
-        enemy.coords.x = 0
-        enemy.coords.y = 0
+    function enemies_ai:spawn(xc, yc)
+        enemy = {}
+        enemy.coords = {}
+        enemy.coords.x = xc
+        enemy.coords.y = yc
         enemy.speed = 5
         enemy.cooldown = 22
-        enemy.dots = {}
         table.insert(self.enemies, enemy)
     end
 
-    function enemy:launch()
-        -- If the cooldown does ever reach 0 then it will set it back to the default
-        if self.cooldown <= 0 then 
-            self.cooldown = 22
-            dot = {}
-            dot.x = self.coords.x + 35
-            dot.y = self.coords.y - 4
-            table.insert(self.dots, dot)
-        end
+    for i = 0, 10 do
+        enemies_ai:spawn(i * 100, 0)
     end
 
-    enemies_ai:spawn()
+    print(enemy)
 end
 
 function love.update(dt)
@@ -98,6 +92,7 @@ function love.draw()
 
     -- Code here relates to the enemies
     -- Renders an enemy anytime the spawn function is called
+    love.graphics.setColor(255, 0, 0)
     for _, e in pairs(enemies_ai.enemies) do
         love.graphics.rectangle("fill", e.coords.x, e.coords.y, 80, 15)
     end
