@@ -27,6 +27,8 @@ function love.load()
         if player.cooldown <= 0 then 
             player.cooldown = 22
             dot = {}
+            dot.width = 10
+            dot.height = 10
             dot.x = player.coords.x + 35
             dot.y = player.coords.y - 4
             table.insert(player.dots, dot)
