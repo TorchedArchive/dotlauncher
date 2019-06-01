@@ -19,9 +19,10 @@ Since the game is very early in it's stage of life, I still have a lot to work o
 - Sound
 - Better collision detection
 - Minigames..?
-- Main Menu
+- Main Menu **WIP**
 - Settings
 - More keyboard shortcuts/controls
+- More efficient code
 
 # Contributing
 If you want to add anything to my code, you can simply fork this repository, make your changes and then make a pull request. I will accept mostly any changes you make.
