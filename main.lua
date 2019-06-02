@@ -34,11 +34,16 @@ enemy.coords = {}
 enemies_ai = {}
 enemies_ai.enemies = {}
 
+-- Loading config here for multiple reasons
+config = require("config")
+
 function love.load()
     -- Since we need a new font, we got one on itch.io lol
     font = love.graphics.newFont("m5x7.ttf", 100)
     love.graphics.setFont(font)
 
+    -- Instead of just saying "Untitled" at the top of the window, we can have it say our game name and version.
+    love.window.setTitle("dotlauncher - v"..config.version)
     --[[
         So, to make a main menu we will have to have a different "state" for the game.
         My plan is to make it so there are 3 types of states:
