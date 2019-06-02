@@ -38,8 +38,8 @@ enemies_ai.enemies = {}
 config = require("config")
 
 -- Load all images that we need
-dotlauncher_logo = love.graphics.newImage("dotlauncher")
-dolta = love.graphics.newImage("dolta")
+dotlauncher_logo = love.graphics.newImage("dotlauncher.png")
+dolta = love.graphics.newImage("dolta.png")
 
 function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest")
