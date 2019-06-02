@@ -15,7 +15,7 @@ Since the game is very early in it's stage of life, I still have a lot to work o
 - Multiple waves
 - Shooting Enemies
 - Multiplayer (in another version of it)
-- Graphics
+- Graphics **WIP**
 - Sound
 - Better collision detection
 - Minigames..?

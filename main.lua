@@ -40,7 +40,12 @@ config = require("config")
 function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest")
 
-    -- Load all images that we need
+    --[[
+        These right here are just some images that we will load to use in our game.
+        Instead of making stuff from rectangles and other shapes, we can use assets made in a app specifically for creating pixel art.
+        Not everything will be pictures though, as the bullet can still be generated.
+    ]]--
+    background = love.graphics.newImage("background.png")
     dotlauncher_logo = love.graphics.newImage("dotlauncher.png")
     dolta = love.graphics.newImage("dolta.png")
 
