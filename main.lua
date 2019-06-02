@@ -184,10 +184,8 @@ function love.draw()
         end
     else
         -- Code here relates to the player
-        -- Gives the player a blue color
-        love.graphics.setColor(0.2, 0.576, 1)
         -- Renders a character
-        love.graphics.rectangle("fill", player.coords.x, player.coords.y, player.height, player.width)
+        love.graphics.draw(dolta, player.coords.x, player.coords.y)
         -- Makes anything here white
         love.graphics.setColor(1, 1, 1)
         -- A FPS counter for debugging purposes (which idk)
