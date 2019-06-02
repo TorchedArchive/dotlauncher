@@ -156,7 +156,7 @@ function love.draw()
     --]]
     if state == "menu" then
         love.graphics.print("dotlauncher", 225, 50)
-
+        love.graphics.print("Press \"Enter\" to start!", 225, 500)
         function love.keypressed(key)
             if key == "return" then
                 state = "game"
