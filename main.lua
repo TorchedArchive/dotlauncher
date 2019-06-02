@@ -43,9 +43,9 @@ function love.load()
     -- Load all images that we need
     dotlauncher_logo = love.graphics.newImage("dotlauncher.png")
     dolta = love.graphics.newImage("dolta.png")
-    
+
     -- Since we need a new font, we got one on itch.io lol
-    font = love.graphics.newFont("m5x7.ttf", 100)
+    font = love.graphics.newFont("m5x7.ttf", 55)
     love.graphics.setFont(font)
 
     -- Instead of just saying "Untitled" at the top of the window, we can have it say our game name and version.
@@ -161,22 +161,22 @@ function love.update(dt)
 end
 
 function love.draw()
+    -- Makes the background color similar to Pong
+    love.graphics.clear(0.156, 0.176, 0.203, 1)
+
     --[[ 
         If the game has just been launched, it will immediately be in the menu state.
         Here we will just create a simple menu where if the user presses Enter, it will start the game.
     --]]
     if state == "menu" then
-        love.graphics.draw(dotlauncher_logo, 180, 50, 0, 8, 8)
-        love.graphics.print("Press \"Enter\" to start!", 225, 500)
+        love.graphics.draw(dotlauncher_logo, 175, 50, 0, 8, 8)
+        love.graphics.print("Press \"Enter\" to start!", 215, 500)
         function love.keypressed(key)
             if key == "return" then
                 state = "game"
             end
         end
     else
-        -- Makes the background color similar to Pong
-        love.graphics.clear(0.156, 0.176, 0.203, 1)
-
         -- Code here relates to the player
         -- Gives the player a blue color
         love.graphics.setColor(0.2, 0.576, 1)
