@@ -46,8 +46,11 @@ function love.load()
         Not everything will be pictures though, as the bullet can still be generated.
     ]]--
     background = love.graphics.newImage("background.png")
+
     dotlauncher_logo = love.graphics.newImage("dotlauncher.png")
     dolta = love.graphics.newImage("dolta.png")
+
+    enemy_ship = love.graphics.newImage("ship.png")
 
     -- Since we need a new font, we got one on itch.io lol
     font = love.graphics.newFont("m5x7.ttf", 55)
@@ -200,7 +203,7 @@ function love.draw()
         love.graphics.setColor(1, 0.176, 0.156)
         -- Renders an enemy anytime the spawn function is called
         for _, e in pairs(enemies_ai.enemies) do
-            love.graphics.rectangle("fill", e.coords.x, e.coords.y, e.height, e.width)
+            love.graphics.draw(enemy_ship, e.coords.x + 100, e.coords.y, 0, 6)
         end
     end
 end
