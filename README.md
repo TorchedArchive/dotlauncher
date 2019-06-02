@@ -19,7 +19,7 @@ Since the game is very early in it's stage of life, I still have a lot to work o
 - Sound
 - Better collision detection
 - Minigames..?
-- Main Menu **WIP**
+- ~~Main Menu~~ **DONE**
 - Settings
 - More keyboard shortcuts/controls
 - More efficient code
