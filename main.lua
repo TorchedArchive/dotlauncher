@@ -79,7 +79,7 @@ function love.load()
     player.height = 80
     player.width = 15
     -- This is how fast they will go along the x axis (speed)
-    player.speed = 5
+    player.speed = 300
     -- In order to stop the player from shooting a beam but instead an actual dot, we will add a cooldown to shoot
     player.cooldown = 22
     -- These are the bullets (Lets call them Dot) that the player will shoot out of their "Dot Launcher"
@@ -95,6 +95,39 @@ function love.load()
             dot.x = player.coords.x + 54
             dot.y = player.coords.y + 2
             table.insert(player.dots, dot)
+        end
+    end
+
+    player.draw = function()
+        -- Code here relates to the player
+        -- Renders a character
+        love.graphics.draw(dolta, player.coords.x, player.coords.y, 0, 4)
+        -- Makes anything here white
+        love.graphics.setColor(1, 1, 1)
+        -- A FPS counter for debugging purposes (which idk)
+        love.graphics.print("FPS: "..tostring(love.timer.getFPS()), 640, 10)
+        -- The loop down here checks if the launch function is called and makes a drawing of a bullet
+        for _, d in pairs(player.dots) do
+            love.graphics.rectangle("fill", d.x, d.y, 10, 10)
+        end
+    end
+
+    player.update = function(dt)
+        -- All of this code relates to the player
+        -- Here it will reduce the cooldown to 0
+        player.cooldown = player.cooldown - 1
+        -- Here it will move to the right if the right arrow is pressed/held
+        if love.keyboard.isDown("right") then
+            player.coords.x = player.coords.x + player.speed * dt
+        -- And will do the same thing above except to the left
+        elseif love.keyboard.isDown("left") then
+            player.coords.x = player.coords.x - player.speed * dt
+        end
+
+        -- Shoots the bullets if space is held down/pressed
+        if love.keyboard.isDown("space") then
+            -- This function here will fire a dot
+            player.launch()
         end
     end
 
@@ -130,27 +163,35 @@ function collisionDetection(enemies, dots)
     end
 end
 
+function love.draw()
+    -- Loads in the background and uses it all the time
+    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.draw(background, 0, 0)
+
+    --[[ 
+        If the game has just been launched, it will immediately be in the menu state.
+        Here we will just create a simple menu where if the user presses Enter, it will start the game.
+    --]]
+    if state == "menu" then
+        love.graphics.draw(dotlauncher_logo, 170, 30, 0, 8, 8)
+        love.graphics.print("Press \"Enter\" to start!", 195, 480)
+        
+    else
+        player.draw()
+        -- Code here relates to the enemies
+        -- Makes the enemy a red color
+        love.graphics.setColor(1, 0.176, 0.156)
+        -- Renders an enemy anytime the spawn function is called
+        for _, e in pairs(enemies_ai.enemies) do
+            love.graphics.draw(enemy_ship, e.coords.x + 100, e.coords.y, 0, 6)
+        end
+    end
+end
+
 function love.update(dt)
     if state == "menu" then
         return
     else
-        -- All of this code relates to the player
-        -- Here it will reduce the cooldown to 0
-        player.cooldown = player.cooldown - 1
-        -- Here it will move to the right if the right arrow is pressed/held
-        if love.keyboard.isDown("right") then
-            player.coords.x = player.coords.x + player.speed
-        -- And will do the same thing above except to the left
-        elseif love.keyboard.isDown("left") then
-            player.coords.x = player.coords.x - player.speed
-        end
-
-        -- Shoots the bullets if space is held down/pressed
-        if love.keyboard.isDown("space") then
-            -- This function here will fire a dot
-            player.launch()
-        end
-
         -- All this loop here does is that anytime the launch function is called it will make it so that the bullet moves
         -- Without this, the first loop below in our draw function will only create a dot but it will not move
         for _, d in pairs(player.dots) do
@@ -165,45 +206,14 @@ function love.update(dt)
 
         -- Checks if the dots have hit the enemy
         collisionDetection(enemies_ai.enemies, player.dots)
+
+        player.update(dt)
     end
 end
 
-function love.draw()
-    -- Loads in the background and uses it all the time
-    love.graphics.setColor(1, 1, 1, 1)
-    love.graphics.draw(background, 0, 0)
-
-    --[[ 
-        If the game has just been launched, it will immediately be in the menu state.
-        Here we will just create a simple menu where if the user presses Enter, it will start the game.
-    --]]
-    if state == "menu" then
-        love.graphics.draw(dotlauncher_logo, 170, 30, 0, 8, 8)
-        love.graphics.print("Press \"Enter\" to start!", 195, 480)
-        function love.keypressed(key)
-            if key == "return" then
-                state = "game"
-            end
-        end
-    else
-        -- Code here relates to the player
-        -- Renders a character
-        love.graphics.draw(dolta, player.coords.x, player.coords.y, 0, 4)
-        -- Makes anything here white
-        love.graphics.setColor(1, 1, 1)
-        -- A FPS counter for debugging purposes (which idk)
-        love.graphics.print("FPS: "..tostring(love.timer.getFPS()), 640, 10)
-        -- The loop down here checks if the launch function is called and makes a drawing of a bullet
-        for _, d in pairs(player.dots) do
-            love.graphics.rectangle("fill", d.x, d.y, 10, 10)
-        end
-
-        -- Code here relates to the enemies
-        -- Makes the enemy a red color
-        love.graphics.setColor(1, 0.176, 0.156)
-        -- Renders an enemy anytime the spawn function is called
-        for _, e in pairs(enemies_ai.enemies) do
-            love.graphics.draw(enemy_ship, e.coords.x + 100, e.coords.y, 0, 6)
-        end
+function love.keypressed(key)
+    if key == "return" then
+        state = "game"
     end
+    if key == "escape" then love.event.quit() end
 end
