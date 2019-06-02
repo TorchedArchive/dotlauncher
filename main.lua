@@ -37,12 +37,13 @@ enemies_ai.enemies = {}
 -- Loading config here for multiple reasons
 config = require("config")
 
--- Load all images that we need
-dotlauncher_logo = love.graphics.newImage("dotlauncher.png")
-dolta = love.graphics.newImage("dolta.png")
-
 function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest")
+
+    -- Load all images that we need
+    dotlauncher_logo = love.graphics.newImage("dotlauncher.png")
+    dolta = love.graphics.newImage("dolta.png")
+    
     -- Since we need a new font, we got one on itch.io lol
     font = love.graphics.newFont("m5x7.ttf", 100)
     love.graphics.setFont(font)
@@ -165,7 +166,7 @@ function love.draw()
         Here we will just create a simple menu where if the user presses Enter, it will start the game.
     --]]
     if state == "menu" then
-        love.graphics.draw(dotlauncher_logo, 225, 50)
+        love.graphics.draw(dotlauncher_logo, 225, 50, 0, 6, 6)
         love.graphics.print("Press \"Enter\" to start!", 225, 500)
         function love.keypressed(key)
             if key == "return" then
