@@ -13,7 +13,7 @@ Currently, dotlauncher is in a very early alpha phase. I intend for the final ve
 Refer to the todo list below for everything I want to add.
 
 # Todo
-Since the game is very early in it's stage of life, I still have a lot to work on. Here is a full todo list of what I want the entire game to have:
+Since the game is very early in its stage of life, I still have a lot to work on. Here is a full todo list of what I want the entire game to have:
 - Multiple waves
 - Shooting Enemies
 - Multiplayer (in another version of it)
