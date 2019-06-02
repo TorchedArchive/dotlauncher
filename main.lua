@@ -166,8 +166,8 @@ function love.update(dt)
 end
 
 function love.draw()
-    -- Makes the background color similar to Pong
-    love.graphics.clear(0.156, 0.176, 0.203, 1)
+    -- Loads in the background and uses it all the time
+    love.graphics.draw(background, 0, 0)
 
     --[[ 
         If the game has just been launched, it will immediately be in the menu state.
