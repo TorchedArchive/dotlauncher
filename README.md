@@ -1,4 +1,6 @@
-# dotlauncher
+<p align="center>
+          <b>dotlauncher</b>
+</p>
 
 ![dotlauncher](https://cdn.discordapp.com/attachments/524558580419133480/584814033044242432/dotlauncher_large.png)
 
