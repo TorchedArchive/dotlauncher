@@ -167,6 +167,7 @@ end
 
 function love.draw()
     -- Loads in the background and uses it all the time
+    love.graphics.setColor(1, 1, 1, 1)
     love.graphics.draw(background, 0, 0)
 
     --[[ 
