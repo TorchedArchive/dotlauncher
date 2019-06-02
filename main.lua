@@ -166,7 +166,7 @@ function love.draw()
         Here we will just create a simple menu where if the user presses Enter, it will start the game.
     --]]
     if state == "menu" then
-        love.graphics.draw(dotlauncher_logo, 225, 50, 0, 6, 6)
+        love.graphics.draw(dotlauncher_logo, 180, 50, 0, 8, 8)
         love.graphics.print("Press \"Enter\" to start!", 225, 500)
         function love.keypressed(key)
             if key == "return" then
