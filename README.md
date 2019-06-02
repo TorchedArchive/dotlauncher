@@ -1,5 +1,7 @@
 # dotlauncher
 
+![dotlauncher](https://github.com/SamuraiStacks/dotlauncher/raw/master/dotlauncher.png)
+
 dotlauncher is a game inspired by Space Invaders. It was made for me to learn Lua, Love2D and what it's like to actually develop a game from scratch.
 
 Currently, dotlauncher is in a very early alpha phase. I intend for the final version to have:
