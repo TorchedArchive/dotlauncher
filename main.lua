@@ -185,7 +185,7 @@ function love.draw()
     else
         -- Code here relates to the player
         -- Renders a character
-        love.graphics.draw(dolta, player.coords.x, player.coords.y, 0, 2)
+        love.graphics.draw(dolta, player.coords.x - 20, player.coords.y, 0, 2)
         -- Makes anything here white
         love.graphics.setColor(1, 1, 1)
         -- A FPS counter for debugging purposes (which idk)
