@@ -27,5 +27,7 @@
     i. Copy any of this code and use it in your own projects without full credit.
     ii. Distribute a modified version of this application claiming it is entirely your work.
 --]]
+local config = {}
 
-version = "0.0.74"
+config.version = "0.0.83"
+return config
