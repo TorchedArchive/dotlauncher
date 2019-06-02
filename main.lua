@@ -89,8 +89,8 @@ function love.load()
             dot = {}
             dot.width = 10
             dot.height = 10
-            dot.x = player.coords.x + 35
-            dot.y = player.coords.y - 4
+            dot.x = player.coords.x + 50
+            dot.y = player.coords.y + 6
             table.insert(player.dots, dot)
         end
     end
