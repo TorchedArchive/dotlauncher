@@ -189,7 +189,7 @@ function love.draw()
         -- Makes anything here white
         love.graphics.setColor(1, 1, 1)
         -- A FPS counter for debugging purposes (which idk)
-        love.graphics.print("FPS: "..tostring(love.timer.getFPS()), 550, 10)
+        love.graphics.print("FPS: "..tostring(love.timer.getFPS()), 640, 10)
         -- The loop down here checks if the launch function is called and makes a drawing of a bullet
         for _, d in pairs(player.dots) do
             love.graphics.rectangle("fill", d.x, d.y, 10, 10)
