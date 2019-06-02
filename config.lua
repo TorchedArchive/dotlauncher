@@ -29,5 +29,5 @@
 --]]
 local config = {}
 
-config.version = "0.0.103"
+config.version = "0.0.106"
 return config
