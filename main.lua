@@ -38,6 +38,10 @@ enemies_ai.enemies = {}
 config = require("config")
 
 function love.load()
+
+    WW, WH = love.graphics:getDimensions()
+
+    scale = 4
     love.graphics.setDefaultFilter("nearest", "nearest")
 
     --[[
@@ -48,7 +52,6 @@ function love.load()
     background = love.graphics.newImage("background.png")
 
     dotlauncher_logo = love.graphics.newImage("dotlauncher.png")
-    dolta = love.graphics.newImage("dolta.png")
 
     enemy_ship = love.graphics.newImage("ship.png")
 
@@ -71,13 +74,15 @@ function love.load()
     -- All the code about the player itself is up here
     -- Array/Object of the player containing info about it (speed, coordinates, etc)
     player = {}
+
+    player.image = love.graphics.newImage("dolta.png")
+    player.width = player.image:getWidth() * scale
+    player.height = player.image:getHeight() * scale
+
     -- This is the coordinate of a player
     player.coords = {}
     player.coords.x = 0
     player.coords.y = 470
-    -- How high and wide the rendered player will be
-    player.height = 80
-    player.width = 15
     -- This is how fast they will go along the x axis (speed)
     player.speed = 300
     -- In order to stop the player from shooting a beam but instead an actual dot, we will add a cooldown to shoot
@@ -101,7 +106,7 @@ function love.load()
     player.draw = function()
         -- Code here relates to the player
         -- Renders a character
-        love.graphics.draw(dolta, player.coords.x, player.coords.y, 0, 4)
+        love.graphics.draw(player.image, player.coords.x, player.coords.y, 0, scale, scale)
         -- Makes anything here white
         love.graphics.setColor(1, 1, 1)
         -- A FPS counter for debugging purposes (which idk)
@@ -123,6 +128,9 @@ function love.load()
         elseif love.keyboard.isDown("left") then
             player.coords.x = player.coords.x - player.speed * dt
         end
+
+        if player.coords.x < 0 then player.coords.x = 0 end
+        if player.coords.x + player.width > WW then player.coords.x = WW - player.width end
 
         -- Shoots the bullets if space is held down/pressed
         if love.keyboard.isDown("space") then
