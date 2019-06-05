@@ -187,8 +187,6 @@ function love.draw()
     else
         player.draw()
         -- Code here relates to the enemies
-        -- Makes the enemy a red color
-        love.graphics.setColor(1, 0.176, 0.156)
         -- Renders an enemy anytime the spawn function is called
         for _, e in pairs(enemies_ai.enemies) do
             love.graphics.draw(enemy_ship, e.coords.x + 100, e.coords.y, 0, 6)
