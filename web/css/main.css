@@ -1,0 +1,79 @@
+body {
+    background-color: #2C2C2C;
+}
+
+/* Navbar */
+#navside .current {
+    color: white;
+}
+
+/* Introduction Section */
+.section img {
+    border-radius: 50%;
+}
+
+h1 {
+    font-size: 28px
+}
+
+h2 {
+    font-size: 20px
+}
+
+/* Footer */
+.footer {
+    margin-top: 170px;
+}
+
+.footer h1 {
+    font-size: 18px;
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: #ABABAB;
+}
+
+.footer ul {
+    text-align: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer ul li {
+    display: inline-block;
+    margin-left: 5px;
+}
+
+/* Footer with extra top margin */
+.marginFooter {
+    margin-top: 380px;
+}
+
+.marginFooter h1 {
+    font-size: 18px;
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: #ABABAB;
+}
+
+.marginFooter ul {
+    text-align: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.marginFooter ul li {
+    display: inline-block;
+    margin-left: 5px;
+}
