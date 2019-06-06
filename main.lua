@@ -185,7 +185,8 @@ function love.draw()
         love.graphics.draw(dotlauncher_logo, 170, 30, 0, 8, 8)
         love.graphics.print("Press \"Enter\" to start!", 195, 480)
     elseif state == "p_menu" then
-        love.graphics.print("Paused!", 300, 400)
+        love.graphics.print("Paused!", 340, 250)
+        love.graphics.print("Press \"Enter\" to continue!", 190, 300)
     else
         player.draw()
         -- Code here relates to the enemies
