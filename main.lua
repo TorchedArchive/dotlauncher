@@ -42,6 +42,7 @@ function love.load()
     WW, WH = love.graphics:getDimensions()
 
     scale = 4
+    -- Makes images not so blurry
     love.graphics.setDefaultFilter("nearest", "nearest")
 
     --[[
@@ -183,7 +184,8 @@ function love.draw()
     if state == "menu" then
         love.graphics.draw(dotlauncher_logo, 170, 30, 0, 8, 8)
         love.graphics.print("Press \"Enter\" to start!", 195, 480)
-        
+    elseif state == "p_menu" then
+        love.graphics.print("Paused!", 300, 400)
     else
         player.draw()
         -- Code here relates to the enemies
@@ -196,6 +198,8 @@ end
 
 function love.update(dt)
     if state == "menu" then
+        return
+    elseif state == "p_menu" then
         return
     else
         -- All this loop here does is that anytime the launch function is called it will make it so that the bullet moves
@@ -221,5 +225,9 @@ function love.keypressed(key)
     if key == "return" then
         state = "game"
     end
-    if key == "escape" then love.event.quit() end
+    if key == "e" then love.event.quit() end
+    -- "Pauses the game"
+    if key == "escape" and state == "game" then
+        state = "p_menu"
+    end
 end
