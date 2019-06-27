@@ -62,6 +62,7 @@ function love.load()
 
     -- Load in our sound files for SFX
     launch_s = love.audio.newSource("Fire 2.mp3", "static")
+    hit = love.audio.newSource("Hit.mp3", "static")
     -- Instead of just saying "Untitled" at the top of the window, we can have it say our game name and version.
     love.window.setTitle("dotlauncher - v"..config.version)
     --[[
@@ -169,7 +170,8 @@ function collisionDetection(enemies, dots)
     for i, e in ipairs(enemies) do
         for _, d in pairs(dots) do
             if d.y + d.height <= e.coords.y and d.x > e.coords.x and e.coords.x < d.x + d.width then
-                return table.remove(enemies, i)
+                table.remove(enemies, i)
+                love.audio.play(hit)
             end
         end
     end
