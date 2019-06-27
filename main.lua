@@ -103,6 +103,7 @@ function love.load()
             dot.x = player.coords.x + 54
             dot.y = player.coords.y + 2
             table.insert(player.dots, dot)
+            love.audio.play(launch_s)
         end
     end
 
@@ -139,7 +140,6 @@ function love.load()
         if love.keyboard.isDown("space") then
             -- This function here will fire a dot
             player.launch()
-            love.audio.play(launch_s)
         end
     end
 
