@@ -60,6 +60,8 @@ function love.load()
     font = love.graphics.newFont("m5x7.ttf", 55)
     love.graphics.setFont(font)
 
+    -- Load in our sound files for SFX
+    launch_s = love.audio.newSource("Fire 2.mp3", "static")
     -- Instead of just saying "Untitled" at the top of the window, we can have it say our game name and version.
     love.window.setTitle("dotlauncher - v"..config.version)
     --[[
@@ -137,6 +139,7 @@ function love.load()
         if love.keyboard.isDown("space") then
             -- This function here will fire a dot
             player.launch()
+            love.audio.play(launch_s)
         end
     end
 
@@ -186,7 +189,7 @@ function love.draw()
         love.graphics.print("Press \"Enter\" to start!", 195, 480)
     elseif state == "p_menu" then
         love.graphics.print("Paused!", 340, 250)
-        love.graphics.print("Press \"Enter\" to continue!", 190, 300)
+        love.graphics.print("Press \"Enter\" to continue.", 190, 300)
     else
         player.draw()
         -- Code here relates to the enemies
@@ -222,6 +225,7 @@ function love.update(dt)
     end
 end
 
+-- Triggers anytime someone presses a key on the keyboard
 function love.keypressed(key)
     if key == "return" then
         state = "game"
@@ -230,5 +234,12 @@ function love.keypressed(key)
     -- "Pauses the game"
     if key == "escape" and state == "game" then
         state = "p_menu"
+    end
+end
+
+-- Triggers anytime someone clicks on their mouse
+function love.mousepressed(x, y, button)
+    if button == 1 then
+        return
     end
 end
