@@ -18,7 +18,7 @@ Since the game is very early in its stage of life, I still have a lot to work on
 - Shooting Enemies
 - Multiplayer (in another version of it)
 - Graphics **WIP**
-- Sound
+- ~~Sound~~ **DONE** (At the current state of the game)
 - Better collision detection
 - Minigames..?
 - ~~Main Menu~~ **DONE**
