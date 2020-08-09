@@ -1,3 +1,5 @@
+**As of August 8th 2020, the code and all other resources of this project (assets, sound) are available to use for anyone. It might or might not benefit you, but if you need it they are here.**
+
 <p align="center">
           <img src="https://cdn.discordapp.com/attachments/524558580419133480/584814033044242432/dotlauncher_large.png">
 </p>
